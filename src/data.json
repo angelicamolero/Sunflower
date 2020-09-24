@@ -1,0 +1,50 @@
+[
+    
+    {
+        "id" : "1",
+        "name" : "Classic Captus",
+        "description" : "lorem ipsum asnfj weirj miuhfj alsjfoi",
+        "price" : 10.20,
+        "img" : "plant-1.png"
+    },
+
+    {
+        "id" : "2",
+        "name" : "Trimble Captus",
+        "description" : "lorem ipsum asnfj weirj miuhfj alsjfoi",
+        "price" : 15.100,
+        "img" : "plant-2.png"
+    },
+
+    {
+        "id" : "3",
+        "name" : "Zebra Plant",
+        "description" : "lorem ipsum asnfj weirj miuhfj alsjfoi",
+        "price" : 20.35,
+        "img" : "plant-3.png"
+    },
+
+    {
+        "id" : "4",
+        "name" : "Heart-Leaf Philodendron",
+        "description" : "lorem ipsum asnfj weirj miuhfj alsjfoi",
+        "price" : 25.15,
+        "img" : "plant-4.png"
+    },
+
+    {
+        "id" : "5",
+        "name" : "Devil's Ivy",
+        "description" : "lorem ipsum asnfj weirj miuhfj alsjfoi",
+        "price" : 15.12,
+        "img" : "plant-5.png"
+    },
+
+    {
+        "id" : "6",
+        "name" : "Japanese Yew",
+        "description" : "lorem ipsum asnfj weirj miuhfj alsjfoi",
+        "price" : 25.11,
+        "img" : "plant-6.png"
+    }
+]
