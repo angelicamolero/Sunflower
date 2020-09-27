@@ -11,8 +11,8 @@ const Product = () => {
     const cartContext = useContext(CartContext);
     const productContext = useContext(ProductContext);
 
-    const { selectProduct } = cartContext;
-    const { dataJson, viewMore } = productContext;
+    const { cart, selectProduct, addMore } = cartContext;
+    const { dataJson} = productContext;
 
     return( 
         <Fragment>
@@ -23,7 +23,10 @@ const Product = () => {
                         <div className="card">
                             <img className="card-img-top" src={images} alt=""/>
                             <div className="card-body">
-                                <div className="add-to-cart" onClick={() => selectProduct(data.id)}>+ ADD TO CART</div>
+                                <div 
+                                    className="add-to-cart" 
+                                    onClick={() => {cart.find(item => item.id === data.id) ? addMore(data) : selectProduct(data.id)}}
+                                >{cart.find(item => item.id === data.id) ? 'ADD MORE' : '+ ADD TO CART'}<span>{(data.quantity === undefined) ? null : data.quantity}</span></div>
                                 <div className="first-line">
                                     <Link 
                                         to={`/item/${data.id}`} 
@@ -31,10 +34,13 @@ const Product = () => {
                                             textDecoration:'none',
                                             color: '#131212'
                                         }} 
-                                        onClick={() => viewMore(data.id)}
                                         ><h5 className="card-title">{data.name}</h5>
                                     </Link>
-                                    <span className="wish-list"><i class="far fa-heart"></i></span>
+                                    <span className="wish-list">
+                                        <i 
+                                            className="far fa-heart"
+                                        ></i>
+                                    </span>
                                 </div>
                                 <div className="line"></div>
                                 <p className="product-price">{data.price}</p>

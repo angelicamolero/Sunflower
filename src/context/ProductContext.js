@@ -1,44 +1,46 @@
 import React, {createContext, useState, useEffect} from 'react';
+////////////////////////////////////////////////////////////////
 import data from '../data.json';
+///////////////////////////////////////////////////////////////
 
 export const ProductContext = createContext();
 
 const getPromise = (d) => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(d)
-        }, 3000);
+        resolve(d)
     })
 }
 
+////////////////////////////////////////////////////////////////
 const ProductProvider = ({children}) => {
     const [dataJson, setDataJson] = useState([]);
-    const [details, setDetails] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [searching, setSearch] = useState('');
 
-    const viewMore = (divID) => {
-        setDetails([])
-        const product = dataJson.filter(prod => prod.id === divID)
-        setDetails(product)
-        // setShow(true)
+    const search = e => {
+        setSearch(e.target.value);
     }
+    
     useEffect(() => {
+        console.log('component did mount')
         getPromise(data).then(result => {
-            setLoading(false)
-            setDataJson(result)
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000)
+            const product = result.filter(item => item.name.toLowerCase().includes(searching));
+            setDataJson(product.length === 0 ? result : product);
         });
-    }, [dataJson])
+    },[searching]);
 
     return ( 
         <ProductContext.Provider
             value={{
                 dataJson,
                 loading,
-                details,
+                searching,
                 setDataJson,
-                setDetails,
                 setLoading,
-                viewMore,
+                search
             }}
         >
             {children}

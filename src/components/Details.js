@@ -1,18 +1,19 @@
-import React, {useState, useContext} from 'react';
-import Quantity from './Quantity';
+import React, { useContext } from 'react';
 import {CartContext} from '../context/CartContext';
 import {ProductContext} from '../context/ProductContext';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 const Details = () => {
 
-    const [count, setCount] = useState(1);
     const cartContext = useContext(CartContext);
     const productContext = useContext(ProductContext);
 
-    const { selectProduct } = cartContext;
-    const { details } = productContext;
+    const { cart, selectProduct, addMore } = cartContext;
+    const { dataJson } = productContext;
 
+    const { id } = useParams();
+
+    const details = dataJson.filter(item => item.id === id);
 
    return (
        <React.Fragment>
@@ -29,13 +30,12 @@ const Details = () => {
                                 <h4 className="product-price">{d.price}</h4>
                                 <h5 className="card-title">{d.name}</h5>
                                 <p className="description">{d.description}</p>
-                                <Quantity
-                                    count={count}
-                                    setCount={setCount}
-                                />
-                                <button className="checkout-btn" type="button" onClick={selectProduct(d.id)}>ADD TO CART<span>{count}</span></button>
+                                <button className="checkout-btn" 
+                                    type="button" 
+                                    onClick={() => {cart.find(item => item.id === d.id) ? addMore(d) : selectProduct(d.id)}}
+                                >{cart.find(item => item.id === d.id) ? 'ADD MORE' : 'ADD TO CART'}<span>{(d.quantity === undefined) ? 0 : d.quantity}</span></button>
                             </div>
-                            <Link to={'/'} className='goBack'><i class="fas fa-arrow-left"></i></Link>
+                            <Link to={'/'} className='goBack'><i className="fas fa-arrow-left"></i></Link>
                         </div>
                     </div>
                 )
