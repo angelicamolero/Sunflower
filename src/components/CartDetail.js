@@ -34,14 +34,14 @@ const CartDetail = () => {
                                 <tbody key={item.id}>
                                     <tr>
                                         <td className="cart-image">
-                                            <a href="!#">
+                                            <figure>
                                                 <img src={images} alt={item.name}/>
-                                            </a>
+                                            </figure>
                                         </td>
                                         <td className="product-name"> <h4>{item.name}</h4></td>
                                         <td className="product-price">{sumItems(item)}</td>
                                         <td className="cart-quantity"><Quantity prod={item}/></td>
-                                        <td onClick={() => deleteProduct(item.id)}><i className="fas fa-trash"></i></td>
+                                        <td className="cart-trash" onClick={() => deleteProduct(item.id)}><i className="fas fa-trash"></i></td>
                                     </tr>
                                 </tbody>
                         )
@@ -50,7 +50,7 @@ const CartDetail = () => {
                     })}
 
                     </table>
-                        <button onClick={() => cleanCart()}>Clean cart</button>
+                        <button className="clean-button" onClick={() => cleanCart()}>Clean cart</button>
                     </div>
                 </div>)}
         </React.Fragment>

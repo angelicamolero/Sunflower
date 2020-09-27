@@ -33,7 +33,7 @@ const Details = () => {
                                 <button className="checkout-btn" 
                                     type="button" 
                                     onClick={() => {cart.find(item => item.id === d.id) ? addMore(d) : selectProduct(d.id)}}
-                                >{cart.find(item => item.id === d.id) ? 'ADD MORE' : 'ADD TO CART'}<span>{(d.quantity === undefined) ? 0 : d.quantity}</span></button>
+                                >{cart.find(item => item.id === d.id) ? 'ADD MORE' : 'ADD TO CART'}</button>
                             </div>
                             <Link to={'/'} className='goBack'><i className="fas fa-arrow-left"></i></Link>
                         </div>

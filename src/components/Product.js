@@ -26,7 +26,7 @@ const Product = () => {
                                 <div 
                                     className="add-to-cart" 
                                     onClick={() => {cart.find(item => item.id === data.id) ? addMore(data) : selectProduct(data.id)}}
-                                >{cart.find(item => item.id === data.id) ? 'ADD MORE' : '+ ADD TO CART'}<span>{(data.quantity === undefined) ? null : data.quantity}</span></div>
+                                >{cart.find(item => item.id === data.id) ? 'ADD MORE' : '+ ADD TO CART'}</div>
                                 <div className="first-line">
                                     <Link 
                                         to={`/item/${data.id}`} 
