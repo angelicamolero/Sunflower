@@ -2,6 +2,7 @@ import React, {createContext, useState, useEffect} from 'react';
 ////////////////////////////////////////////////////////////////
 import data from '../data.json';
 ///////////////////////////////////////////////////////////////
+import { getFirestore } from '../firebase/index'
 
 export const ProductContext = createContext();
 
@@ -22,14 +23,18 @@ const ProductProvider = ({children}) => {
     }
     
     useEffect(() => {
-        console.log('component did mount')
-        getPromise(data).then(result => {
+        const db = getFirestore();
+        const itemCollection = db.collection('items');
+        itemCollection.get().then((querySnapshot) => {
+            setDataJson( querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}))); 
+        }).finally(() => {
             setTimeout(() => {
                 setLoading(false)
             }, 3000)
-            const product = result.filter(item => item.name.toLowerCase().includes(searching));
-            setDataJson(product.length === 0 ? result : product);
-        });
+        })
+        const product = dataJson.filter(item => item.name.toLowerCase().includes(searching));
+        setDataJson(d => product.length === 0 ? d : product);
+        console.log('component did mount')
     },[searching]);
 
     return ( 
