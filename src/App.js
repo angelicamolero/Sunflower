@@ -11,6 +11,8 @@ import WishList from './components/WishList';
 import Contact from './components/Contact'
 import Details from './components/Details';
 import Footer from './components/footer';
+import FormCheckout from './components/FormCheckout';
+import Order from './components/Order';
 /////////////////////////////////////////////////////////////////
 import CartProvider from './context/CartContext';
 import ProductProvider from './context/ProductContext';
@@ -41,6 +43,12 @@ function App() {
                 </Route>
                 <Route path="/contact">
                   <Contact/>
+                </Route>
+                <Route path="/formcheckout">
+                  <FormCheckout/>
+                </Route>
+                <Route path="/order">
+                  <Order/>
                 </Route>
               </Switch>
             </div>

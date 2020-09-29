@@ -7,10 +7,12 @@ export const CartContext = createContext();
 const CartProvider = ({children}) => {
     const [cart, addToCart] = useState([]);
     const [count, setCount] = useState(1);
+    
 
     const selectProduct = (prodID) => {
         const product = dataJson.filter(p => p.id === prodID)[0];
-        product.quantity = 1;
+        
+       
         if(!cart.find(item => item.id === product.id)){
             addToCart([
                 ...cart,
