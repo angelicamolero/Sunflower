@@ -15,6 +15,7 @@ import Footer from './components/footer';
 import Error from './components/Error';
 import FormCheckout from './components/FormCheckout';
 import Order from './components/Order';
+
 /////////////////////////////////////////////////////////////////
 import CartProvider from './context/CartContext';
 import ProductProvider from './context/ProductContext';

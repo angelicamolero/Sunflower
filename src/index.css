@@ -495,6 +495,7 @@ footer .container .row {
   background-color: #fff;
   box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.2);
   flex-direction: column;
+  
 }
 
 .order-summary h3 {
@@ -571,4 +572,41 @@ footer .container .row {
 .error {
   padding: 3rem;
   font-size: 2rem;
+}
+/* CONTACT US */
+
+.contact-headline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.contact-headline h3 {
+  padding-top: 20rem;
+  font-size: 5rem;
+  font-weight: 400;
+}
+
+.social-contact .icon {
+  font-size: 5rem;
+  color: #fbb710;
+}
+
+.social-contact .icon .fa-instagram {
+  padding-left: 10rem;
+}
+
+.social-contact {
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height:10rem;
+  border-radius: 2em;
+  width: 50%;
+  position: relative;
+  left: 25%;
 }

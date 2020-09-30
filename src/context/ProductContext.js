@@ -42,6 +42,7 @@ const ProductProvider = ({children}) => {
                 setLoading(false)
             }, 3000)
         })
+        // eslint-disable-next-line
     }, [searching]);
 
     return ( 
