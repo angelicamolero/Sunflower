@@ -17,7 +17,7 @@ const Details = () => {
 
    return (
        <React.Fragment>
-            {details.map(d => {
+            {details && details.map(d => {
                 const images = require(`../img/${d.img}`);
                 return (
                     <div className="container" key={d.id}>
@@ -34,12 +34,14 @@ const Details = () => {
                                     type="button" 
                                     onClick={() => {cart.find(item => item.id === d.id) ? addMore(d) : selectProduct(d.id)}}
                                 >{cart.find(item => item.id === d.id) ? 'ADD MORE' : 'ADD TO CART'}</button>
+                                {cart.find(item => item.id === d.id && item.quantity > 0) && <span>You have {cart.find(item => item.id === d.id).quantity} plants in your cart!</span>}
                             </div>
                             <Link to={'/'} className='goBack'><i className="fas fa-arrow-left"></i></Link>
                         </div>
                     </div>
                 )
             })}
+
        </React.Fragment>
 
 

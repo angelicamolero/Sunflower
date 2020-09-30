@@ -1,18 +1,16 @@
-import React, {createContext, useState} from 'react';
-
-import dataJson from '../data.json';
+import React, {createContext, useState, useEffect} from 'react';
+import { getFirestore } from '../firebase/index';
 
 export const CartContext = createContext();
 
 const CartProvider = ({children}) => {
     const [cart, addToCart] = useState([]);
+    const [dataJson, setDataJson] = useState([]);
     const [count, setCount] = useState(1);
-    
 
     const selectProduct = (prodID) => {
         const product = dataJson.filter(p => p.id === prodID)[0];
-        
-       
+        product.quantity = 1
         if(!cart.find(item => item.id === product.id)){
             addToCart([
                 ...cart,
@@ -22,9 +20,13 @@ const CartProvider = ({children}) => {
     }
 
     const addMore = (prod) =>{
+        if(cart[cart.findIndex(item => item.id === prod.id)].quantity >= cart[cart.findIndex(item => item.id === prod.id)].stock){
+            alert(`You can't add more, there's only ${prod.stock} in stock`)
+            cart[cart.findIndex(item => item.id === prod.id)].quantity = cart[cart.findIndex(item => item.id === prod.id)].stock
+            return;
+        }
         setCount(count + 1);
-        // (prod.quantity === undefined) ? prod.quantity = 1 : null;
-        if(cart[cart.findIndex(item => item.id === prod.id)].quantity === undefined){
+        if(cart[cart.findIndex(item => item.id === prod.id)].quantity === 0){
             prod.quantity = 1;
         } else{
             cart[cart.findIndex(item => item.id === prod.id)].quantity++
@@ -55,6 +57,14 @@ const CartProvider = ({children}) => {
     }
 
     const cleanCart = () => addToCart([]);
+
+    useEffect(() => {
+        const db = getFirestore();
+        const itemCollection = db.collection('items');
+        itemCollection.get().then((querySnapshot) => {
+            setDataJson( querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}))); 
+        })
+    }, [])
 
     return ( 
         <CartContext.Provider

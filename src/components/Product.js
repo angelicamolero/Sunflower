@@ -13,9 +13,6 @@ const Product = () => {
 
     const { cart, selectProduct, addMore } = cartContext;
     const { dataJson} = productContext;
-
-    console.log(dataJson)
-
     return( 
         <Fragment>
             {dataJson.map(data => {

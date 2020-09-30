@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import {v4 as uuidv4} from 'uuid';
+import {Link} from 'react-router-dom';
 import Quantity from './Quantity';
 /////////////////////////////////////////////////////
 import { CartContext } from '../context/CartContext';
@@ -18,7 +19,7 @@ const CartDetail = () => {
                 (<div className='row'>
                     <div className='col cartdiv'>
                     <h3 className="cart-title">Shopping Cart</h3>
-                    <table className="table-responsive" key={`${uuidv4()}`}>
+                    <table id="table-responsive" key={`${uuidv4()}`}>
                         <thead>
                         <tr>
                             <th></th>
@@ -48,7 +49,7 @@ const CartDetail = () => {
                         
                         
                     })}
-
+                    {cart.length === 0 ? null : <Link to='/formcheckout'><button className='u-full-width button-primary'>Continue</button></Link>}
                     </table>
                         <button className="clean-button" onClick={() => cleanCart()}>Clean cart</button>
                     </div>

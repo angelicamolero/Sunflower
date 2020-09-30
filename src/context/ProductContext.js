@@ -1,16 +1,10 @@
 import React, {createContext, useState, useEffect} from 'react';
 ////////////////////////////////////////////////////////////////
-import data from '../data.json';
 ///////////////////////////////////////////////////////////////
-import { getFirestore } from '../firebase/index'
+import { getFirestore } from '../firebase/index';
 
 export const ProductContext = createContext();
 
-const getPromise = (d) => {
-    return new Promise((resolve, reject) => {
-        resolve(d)
-    })
-}
 
 ////////////////////////////////////////////////////////////////
 const ProductProvider = ({children}) => {
@@ -19,23 +13,36 @@ const ProductProvider = ({children}) => {
     const [searching, setSearch] = useState('');
 
     const search = e => {
+        if(e.target.value === ''){
+            setSearch('')
+            return;
+        }
         setSearch(e.target.value);
     }
+
+
     
     useEffect(() => {
+        const setData = (d) => {
+            setDataJson( d.docs.map(doc => ({...doc.data(), id: doc.id})));
+        }
+        const filteringSearch = () => {
+            if(searching !== ''){
+                const product = dataJson.filter(item => item.name.toLowerCase().includes(searching));
+                setDataJson(product);
+            }
+        }
         const db = getFirestore();
         const itemCollection = db.collection('items');
         itemCollection.get().then((querySnapshot) => {
-            setDataJson( querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}))); 
+            setData(querySnapshot)
+            filteringSearch()
         }).finally(() => {
             setTimeout(() => {
                 setLoading(false)
             }, 3000)
         })
-        const product = dataJson.filter(item => item.name.toLowerCase().includes(searching));
-        setDataJson(d => product.length === 0 ? d : product);
-        console.log('component did mount')
-    },[searching]);
+    }, [searching]);
 
     return ( 
         <ProductContext.Provider
